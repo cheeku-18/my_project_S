@@ -1,0 +1,906 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>Our Story ❤ — A Love Letter Waiting to Become a Yes</title>
+    <meta
+      name="description"
+      content="A private, interactive love story — our memories, our reasons, and one big question."
+    />
+    <meta name="theme-color" content="#C6446E" />
+
+    <!-- SEO / social -->
+    <meta property="og:title" content="Our Story ❤" />
+    <meta
+      property="og:description"
+      content="A private love story, and one big question."
+    />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!-- noindex by default since this is a private/personal page — remove if you want it public/searchable -->
+
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2224%22>💗</text></svg>"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Dancing+Script:wght@500;700&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind (CDN, no build step needed — Netlify ready as static site) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              cream: "#FDF7F4",
+              blush: "#F7C6D9",
+              rose: "#C6446E",
+              roseDeep: "#9C3159",
+              lavender: "#B9A3DE",
+              plum: "#2E1233",
+              gold: "#E7B96A",
+            },
+            fontFamily: {
+              display: ["'Cormorant Garamond'", "serif"],
+              body: ["'Jost'", "sans-serif"],
+              script: ["'Dancing Script'", "cursive"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="font-body">
+    <!-- ============================================================ -->
+    <!-- LOADER -->
+    <!-- ============================================================ -->
+    <div id="loader">
+      <svg
+        class="loader-heart"
+        viewBox="0 0 32 29"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M16 29S1 19.5 1 9.8C1 4.4 5.2 1 9.6 1c3 0 5.4 1.6 6.4 4 1-2.4 3.4-4 6.4-4C26.8 1 31 4.4 31 9.8 31 19.5 16 29 16 29z"
+          fill="#C6446E"
+        />
+      </svg>
+      <div class="loader-text">loading our story…</div>
+    </div>
+
+    <!-- Custom cursor -->
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+
+    <!-- Ambient floating hearts / sparkles -->
+    <canvas id="ambient-canvas"></canvas>
+
+    <!-- Confetti / fireworks canvases (reused across pages) -->
+    <canvas id="confetti-canvas"></canvas>
+    <canvas id="fireworks-canvas"></canvas>
+
+    <!-- ============================================================ -->
+    <!-- NAVBAR -->
+    <!-- ============================================================ -->
+    <header id="navbar">
+      <nav
+        class="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-4"
+      >
+        <a
+          href="#home"
+          class="font-display text-xl sm:text-2xl text-roseDeep tracking-wide"
+          >Our&nbsp;Story <span class="text-rose">❤</span></a
+        >
+
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#about-her" class="nav-link">About Her</a>
+          <a href="#memories" class="nav-link">Memories</a>
+          <a href="#timeline" class="nav-link">Our Story</a>
+          <a href="#letter" class="nav-link">Love Letter</a>
+          <a href="#our-song" class="nav-link">Our Song</a>
+          <a href="#dreams" class="nav-link">Future</a>
+          <a href="#notes" class="nav-link">Notes</a>
+          <a href="#surprise" class="nav-link">Surprise</a>
+        </div>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <button
+            id="music-toggle"
+            aria-label="Toggle background music"
+            class="w-10 h-10 rounded-full border border-rose/30 flex items-center justify-center hover:bg-blush/40 transition"
+          >
+            <svg
+              id="music-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M9 18V5l12-2v13" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="18" cy="16" r="3" />
+            </svg>
+          </button>
+          <button
+            id="theme-toggle"
+            aria-label="Toggle dark mode"
+            class="w-10 h-10 rounded-full border border-rose/30 flex items-center justify-center hover:bg-blush/40 transition"
+          >
+            <svg
+              id="theme-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+              />
+            </svg>
+          </button>
+          <a
+            href="#proposal"
+            class="btn-primary hidden sm:inline-flex !py-2.5 !px-5 !text-[.72rem]"
+            >Will You Be Mine?</a
+          >
+          <button
+            id="nav-burger"
+            aria-label="Open menu"
+            class="lg:hidden w-10 h-10 rounded-full border border-rose/30 flex items-center justify-center"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      <!-- mobile menu -->
+      <div
+        id="mobile-menu"
+        class="lg:hidden hidden flex-col px-6 pb-6 gap-4 bg-cream/95 backdrop-blur"
+      >
+        <a href="#about-her" class="nav-link">About Her</a>
+        <a href="#memories" class="nav-link">Memories</a>
+        <a href="#timeline" class="nav-link">Our Story</a>
+        <a href="#letter" class="nav-link">Love Letter</a>
+        <a href="#our-song" class="nav-link">Our Song</a>
+        <a href="#dreams" class="nav-link">Future</a>
+        <a href="#notes" class="nav-link">Notes</a>
+        <a href="#voice" class="nav-link">Voice Notes</a>
+        <a href="#surprise" class="nav-link">Surprise</a>
+        <a href="#proposal" class="btn-primary justify-center mt-2"
+          >Will You Be Mine?</a
+        >
+      </div>
+    </header>
+
+    <main class="relative z-10">
+      <!-- ============================================================ -->
+      <!-- 1. HOME / HERO -->
+      <!-- ============================================================ -->
+      <section
+        id="home"
+        class="min-h-screen flex flex-col items-center justify-center relative px-6 pt-32 pb-20 text-center overflow-hidden"
+      >
+        <div
+          aria-hidden="true"
+          class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-blush/50 blur-3xl"
+        ></div>
+        <div
+          aria-hidden="true"
+          class="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-lavender/40 blur-3xl"
+        ></div>
+
+        <p class="section-eyebrow reveal">a story, still being written</p>
+        <h1
+          class="font-display section-title text-[13vw] leading-[0.95] sm:text-7xl md:text-8xl mt-4 text-roseDeep reveal"
+        >
+          For&nbsp;<span class="font-script text-rose">Shivangi</span>
+        </h1>
+
+        <p
+          id="typing-target"
+          class="font-display italic text-xl sm:text-3xl mt-6 max-w-2xl min-h-[3.5rem] text-ink/80 reveal"
+        ></p>
+
+        <!-- countdown since first met -->
+        <div
+          class="mt-10 grid grid-cols-4 gap-3 sm:gap-6 reveal"
+          id="countdown"
+          data-first-met="2023-02-14"
+        >
+          <div
+            class="bg-paper/70 rounded-2xl px-3 py-4 sm:px-6 sm:py-5 shadow-lg shadow-rose-deep/5"
+          >
+            <div
+              class="font-display text-2xl sm:text-4xl text-rose"
+              id="cd-days"
+            >
+              0
+            </div>
+            <div
+              class="text-[.6rem] sm:text-xs uppercase tracking-widest opacity-60 mt-1"
+            >
+              days
+            </div>
+          </div>
+          <div
+            class="bg-paper/70 rounded-2xl px-3 py-4 sm:px-6 sm:py-5 shadow-lg shadow-rose-deep/5"
+          >
+            <div
+              class="font-display text-2xl sm:text-4xl text-rose"
+              id="cd-hours"
+            >
+              0
+            </div>
+            <div
+              class="text-[.6rem] sm:text-xs uppercase tracking-widest opacity-60 mt-1"
+            >
+              hours
+            </div>
+          </div>
+          <div
+            class="bg-paper/70 rounded-2xl px-3 py-4 sm:px-6 sm:py-5 shadow-lg shadow-rose-deep/5"
+          >
+            <div
+              class="font-display text-2xl sm:text-4xl text-rose"
+              id="cd-mins"
+            >
+              0
+            </div>
+            <div
+              class="text-[.6rem] sm:text-xs uppercase tracking-widest opacity-60 mt-1"
+            >
+              mins
+            </div>
+          </div>
+          <div
+            class="bg-paper/70 rounded-2xl px-3 py-4 sm:px-6 sm:py-5 shadow-lg shadow-rose-deep/5"
+          >
+            <div
+              class="font-display text-2xl sm:text-4xl text-rose"
+              id="cd-secs"
+            >
+              0
+            </div>
+            <div
+              class="text-[.6rem] sm:text-xs uppercase tracking-widest opacity-60 mt-1"
+            >
+              secs
+            </div>
+          </div>
+        </div>
+        <p class="text-xs uppercase tracking-widest opacity-50 mt-3 reveal">
+          since the day we first met
+        </p>
+
+        <a href="#proposal" class="btn-primary mt-12 reveal">
+          Will You Be Mine? <span aria-hidden="true">→</span>
+        </a>
+
+        <a
+          href="#about-her"
+          class="mt-16 flex flex-col items-center gap-2 opacity-60 hover:opacity-100 transition reveal"
+          aria-label="Scroll down"
+        >
+          <span class="text-[.65rem] uppercase tracking-[.3em]">scroll</span>
+          <svg
+            width="14"
+            height="22"
+            viewBox="0 0 14 22"
+            class="animate-bounce"
+          >
+            <rect
+              x="1"
+              y="1"
+              width="12"
+              height="20"
+              rx="6"
+              stroke="currentColor"
+              fill="none"
+            />
+            <circle cx="7" cy="7" r="1.6" fill="currentColor" />
+          </svg>
+        </a>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 2. ABOUT HER / APPRECIATION -->
+      <!-- ============================================================ -->
+      <section id="about-her" class="py-28 px-6 relative">
+        <div class="max-w-6xl mx-auto text-center">
+          <p class="section-eyebrow reveal">everything about you</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Why You, Shivangi
+          </h2>
+          <p
+            class="font-script text-2xl sm:text-3xl text-rose mt-5 max-w-xl mx-auto reveal"
+          >
+            "You didn't just walk into my life — you rearranged it, gently, into
+            something better."
+          </p>
+
+          <div
+            id="qualities-grid"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 text-left"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 3. MEMORIES GALLERY -->
+      <!-- ============================================================ -->
+      <section
+        id="memories"
+        class="py-28 px-6 bg-blush-soft/40 relative"
+        style="background: var(--blush-soft)"
+      >
+        <div class="max-w-6xl mx-auto">
+          <div class="text-center mb-16">
+            <p class="section-eyebrow reveal">frozen moments</p>
+            <h2
+              class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+            >
+              Our Memories
+            </h2>
+            <p class="opacity-70 mt-4 max-w-xl mx-auto reveal">
+              Tap any moment to see it larger.
+              <!-- <em
+                >(Replace these placeholders with your own photos in
+                <code>js/main.js</code>.)</em
+              > -->
+            </p>
+          </div>
+          <div id="gallery-masonry" class="masonry"></div>
+        </div>
+      </section>
+
+      <!-- Lightbox -->
+      <div
+        id="lightbox"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Photo viewer"
+      >
+        <button
+          id="lightbox-close"
+          aria-label="Close"
+          class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl leading-none"
+        >
+          ✕
+        </button>
+        <button
+          id="lightbox-prev"
+          aria-label="Previous photo"
+          class="absolute left-4 sm:left-8 text-white/70 hover:text-white text-4xl"
+        >
+          ‹
+        </button>
+        <div class="max-w-3xl w-[85vw] text-center">
+          <div
+            id="lightbox-img"
+            class="w-full aspect-[4/3] rounded-2xl shadow-2xl"
+          ></div>
+          <p
+            id="lightbox-caption"
+            class="text-white/90 font-script text-2xl mt-5"
+          ></p>
+        </div>
+        <button
+          id="lightbox-next"
+          aria-label="Next photo"
+          class="absolute right-4 sm:right-8 text-white/70 hover:text-white text-4xl"
+        >
+          ›
+        </button>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- 4. TIMELINE OF OUR STORY -->
+      <!-- ============================================================ -->
+      <section id="timeline" class="py-28 px-6 relative">
+        <div class="max-w-4xl mx-auto text-center mb-20">
+          <p class="section-eyebrow reveal">how it unfolded</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Our Timeline
+          </h2>
+        </div>
+        <div class="max-w-3xl mx-auto relative" id="timeline-wrap">
+          <div class="vine-line" aria-hidden="true"></div>
+          <div
+            class="vine-progress"
+            id="vine-progress"
+            aria-hidden="true"
+          ></div>
+          <div id="timeline-list" class="relative"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 5. LOVE LETTER -->
+      <!-- ============================================================ -->
+      <section
+        id="letter"
+        class="py-28 px-6 relative"
+        style="background: var(--lavender-soft)"
+      >
+        <div class="max-w-3xl mx-auto text-center mb-14">
+          <p class="section-eyebrow reveal">for your eyes only</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            A Love Letter
+          </h2>
+          <p class="opacity-70 mt-3 reveal">Click the envelope to open it.</p>
+        </div>
+
+        <div id="envelope-wrap" class="max-w-xl mx-auto relative">
+          <div
+            class="envelope relative bg-paper rounded-xl shadow-2xl h-56 sm:h-64 cursor-pointer"
+            id="envelope"
+            tabindex="0"
+            role="button"
+            aria-label="Open love letter"
+          >
+            <div class="envelope-flap"></div>
+            <div
+              class="absolute inset-0 flex items-center justify-center font-script text-3xl text-roseDeep"
+            >
+              Open me, Shivangi…
+            </div>
+          </div>
+
+          <div
+            class="letter-paper relative mt-8 bg-white rounded-2xl shadow-2xl p-8 sm:p-12 z-[1]"
+          >
+            <p class="font-script text-2xl text-roseDeep mb-4">
+              My dearest Shivangi,
+            </p>
+            <div
+              class="font-script text-lg sm:text-xl leading-8 text-ink/85 space-y-4"
+              id="letter-body"
+            >
+              <p>
+                I've rewritten this letter more times than I can count, because
+                no version of it ever feels big enough to hold what I actually
+                feel. So let me just say it plainly, in my own handwriting, the
+                way I'd say it if you were sitting right in front of me.
+              </p>
+              <p>
+                You have this way of making ordinary days feel like they matter
+                a random afternoon, a late night phone call. Somehow you turn all of it into
+                something I want to remember.
+              </p>
+              <p>
+                And TBH You have every right to be angry with me... even to slap me. I
+                know I was the one who approached you first. I was the one who
+                kept texting you again and again, just to start a conversation
+                with you. And I was the one who ended up falling for an
+                absolutely gorgeous girl. I couldn't help that. I know it's been
+                a long time. We first connected in 2024, and since then we've
+                only met three times, and we both know why , because of me. We spent hours
+                talking on calls, sharing our time and our lives. 
+                Most of the distance between us exists because of my own
+                hesitation. From the very beginning, I was the one who kept
+                taking a step back. You were always kind to me. You ignored my
+                mistakes, my delays, my confusion, and my lack of clarity more
+                times than I deserved. To be honest, if anyone else had been in
+                your place, they probably would've lost their patience with me
+                long ago. Maybe they would've walked away, maybe they would've
+                scolded me for never being clear about what I wanted. But you...
+                you're different. You're a gem. You've been patient,
+                understanding, and kind to me every single time, even when I
+                gave you reasons not to be. And I think I've held these feelings
+                inside for far too long. I've waited, overthought, hesitated,
+                and doubted myself enough. So now, I think it's finally time for
+                me to say it. Let's do it. Let's stop wondering "what if"
+                Because if there's one thing I've been sure about all this time,
+                it's you.
+              </p>
+              <p>
+                And before I say what I have wanted to say for so long, there is something you should know.
+
+I don't think I've ever been able to tell you just how beautiful you are. Not the kind of beauty that people notice in a photograph and forget a few seconds later, but the kind that stays in someone's mind long after they've looked away.
+<p>Every time I look into your eyes, I lose track of what I was thinking. It's strange how a pair of eyes can hold so much warmth, peace, and magic all at once. Sometimes I feel like I could spend hours just looking at you and still find something new to admire.
+</p>
+
+<p>Your smile has this effortless way of making everything around you feel lighter. And the most beautiful thing about you isn't even how gorgeous you look it's how kind your heart is, how patiently you've understood me, and how gracefully you've handled all my confusion and delays.</p>
+
+<p>There are many beautiful people in this world, but there is only one you. And that's what makes you so special to me. The more I got to know you, the more I realized that my favorite place has never been a city, a destination, or a memory it's simply wherever you are.</p> 
+
+              </p>
+              <p>
+                So here's my heart, on paper, in ink that won't fade: thank you
+                for being my favorite person. Thank you for being patient with
+                me while I worked up the courage to ask you something important
+                which, if you keep scrolling, you'll find waiting for you.
+              </p>
+            </div>
+            <p class="font-script text-2xl text-rose mt-8">
+              Forever yours,<br />Aaryan
+            </p>
+            </div>
+            <p
+              class="text-[.65rem] uppercase tracking-widest opacity-40 mt-6 text-center"
+            >
+              tap to fold it closed
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 6. IF OUR LOVE WERE A SONG -->
+      <!-- ============================================================ -->
+      <section id="our-song" class="py-28 px-6 relative">
+        <div class="max-w-5xl mx-auto text-center">
+          <p class="section-eyebrow reveal">if it had a melody</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            If Our Love Were A Song
+          </h2>
+          <p class="opacity-70 mt-4 max-w-xl mx-auto reveal">
+            Six notes, six little verses about you 
+            <!-- <code>CONFIG.songNotes</code> in <code>js/main.js</code>. -->
+          </p>
+
+          <div
+            id="song-notes-grid"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 text-left"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 7. FUTURE DREAMS -->
+      <!-- ============================================================ -->
+      <section
+        id="dreams"
+        class="py-28 px-6 relative"
+        style="background: var(--blush-soft)"
+      >
+        <div class="max-w-6xl mx-auto text-center">
+          <p class="section-eyebrow reveal">what's next for us</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Our Future, Together
+          </h2>
+          <p class="opacity-70 mt-4 max-w-xl mx-auto reveal">
+            A small vision board of everywhere I want to go and everything I
+            want to build — with you.
+          </p>
+          <div
+            id="dreams-grid"
+            class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 text-left"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 8. NOTES ABOUT HER -->
+      <!-- ============================================================ -->
+      <section
+        id="notes"
+        class="py-28 px-6 relative"
+        style="background: var(--blush-soft)"
+      >
+        <div class="max-w-2xl mx-auto text-center">
+          <p class="section-eyebrow reveal">a running notebook</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Notes About You
+          </h2>
+          <!-- <p class="opacity-70 mt-4 reveal">
+            A single running column for anything about her — memories,
+            thoughts, small things worth keeping. Add, edit, or remove
+            entries anytime in <code>CONFIG.notesAboutHer</code> in
+            <code>js/main.js</code>. -->
+          </p>
+
+          <div id="notes-list" class="grid gap-5 mt-14 text-left"></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 9. VOICE NOTES -->
+      <!-- ============================================================ -->
+      <section
+        id="voice"
+        class="py-28 px-6 relative"
+        style="background: var(--lavender-soft)"
+      >
+        <div class="max-w-4xl mx-auto text-center">
+          <p class="section-eyebrow reveal">just for listening</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Voice Notes &amp; Memories
+          </h2>
+          <!-- <p class="opacity-70 mt-4 max-w-xl mx-auto reveal">
+            Drop your own recordings into <code>assets/audio/</code> and link
+            them in <code>js/main.js</code> — these are ready-made players
+            waiting for your voice.
+          </p> -->
+          <div
+            id="voice-list"
+            class="grid sm:grid-cols-2 gap-6 mt-14 text-left"
+          ></div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 10. SURPRISE (locked) -->
+      <!-- ============================================================ -->
+      <section
+        id="surprise"
+        class="py-28 px-6 relative text-center overflow-hidden"
+      >
+        <div id="surprise-lock" class="max-w-lg mx-auto">
+          <p class="section-eyebrow reveal">a secret, just for you</p>
+          <h2
+            class="font-display section-title text-4xl sm:text-6xl mt-3 reveal"
+          >
+            Unlock The Surprise
+          </h2>
+          <p class="opacity-70 mt-4 reveal">
+            Tap the hearts in this exact order:
+            <strong>small → medium → large</strong>, three times, and something
+            special appears.
+          </p>
+          <div
+            class="flex items-center justify-center gap-6 mt-10 reveal"
+            id="lock-hearts"
+          >
+            <button
+              class="lock-heart"
+              data-size="small"
+              aria-label="small heart"
+            >
+              <svg
+                width="30"
+                height="27"
+                viewBox="0 0 32 29"
+                fill="var(--rose)"
+              >
+                <path
+                  d="M16 29S1 19.5 1 9.8C1 4.4 5.2 1 9.6 1c3 0 5.4 1.6 6.4 4 1-2.4 3.4-4 6.4-4C26.8 1 31 4.4 31 9.8 31 19.5 16 29 16 29z"
+                />
+              </svg>
+            </button>
+            <button
+              class="lock-heart"
+              data-size="medium"
+              aria-label="medium heart"
+            >
+              <svg
+                width="46"
+                height="41"
+                viewBox="0 0 32 29"
+                fill="var(--rose)"
+              >
+                <path
+                  d="M16 29S1 19.5 1 9.8C1 4.4 5.2 1 9.6 1c3 0 5.4 1.6 6.4 4 1-2.4 3.4-4 6.4-4C26.8 1 31 4.4 31 9.8 31 19.5 16 29 16 29z"
+                />
+              </svg>
+            </button>
+            <button
+              class="lock-heart"
+              data-size="large"
+              aria-label="large heart"
+            >
+              <svg
+                width="64"
+                height="58"
+                viewBox="0 0 32 29"
+                fill="var(--rose)"
+              >
+                <path
+                  d="M16 29S1 19.5 1 9.8C1 4.4 5.2 1 9.6 1c3 0 5.4 1.6 6.4 4 1-2.4 3.4-4 6.4-4C26.8 1 31 4.4 31 9.8 31 19.5 16 29 16 29z"
+                />
+              </svg>
+            </button>
+          </div>
+          <p class="text-xs opacity-50 mt-6" id="lock-progress">
+            0 / 3 correct sequences
+          </p>
+        </div>
+
+        <div id="surprise-content" class="hidden max-w-2xl mx-auto">
+          <h3 class="font-script text-4xl sm:text-5xl text-rose">
+            You found it 💕
+          </h3>
+          <p class="font-display italic text-xl sm:text-2xl mt-6 text-ink/85">
+            Every love story has a secret chapter,  this is ours. From the
+            moment you walked in, my ordinary life quietly became extraordinary.
+            This little corner of the internet exists because you deserve to
+            know, in every way possible, just how loved you are.
+            <p class="font-display italic text-xl sm:text-2xl mt-6 text-ink/85">And today, I just want to promise you one thing.
+
+If you choose to give us a chance, I'll do everything I possibly can to make sure you never regret opening that one message request or replying to a complete stranger who eventually fell hopelessly in love with you.
+
+I can't promise that life will always be perfect, or that we'll never have misunderstandings.
+
+But I can promise that you'll never have to question my intentions, my loyalty, or the love I have for you.
+
+Every single day, I'll keep choosing you, respecting you, supporting you, and putting in the effort to make you feel that replying to that one message was one of the most beautiful decisions our story could have begun with.</p>
+
+            <p class="font-display italic text-xl sm:text-2xl mt-6 text-ink/85">BTW , I'll imagine we fell in love
+I'll nap under moonlight skies with you
+I think I'll picture us, you with the waves
+The ocean's colors on your face
+I'll leave my heart with your air
+So let me fly with you
+Will you be forever with me?</p>
+          </p>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- 11. PROPOSAL (main highlight) -->
+      <!-- ============================================================ -->
+      <section
+        id="proposal"
+        class="min-h-screen flex items-center justify-center px-6 py-24 text-center relative overflow-hidden"
+        style="background: var(--plum)"
+        id="proposal-screen"
+      >
+        <div class="relative z-10 max-w-xl mx-auto">
+          <p class="text-gold text-xs uppercase tracking-[.4em] reveal">
+            the question I've been building up to
+          </p>
+
+          <svg
+            class="ring-svg mx-auto mt-8 w-28 sm:w-36"
+            viewBox="0 0 120 140"
+            fill="none"
+          >
+            <ellipse
+              cx="60"
+              cy="95"
+              rx="42"
+              ry="38"
+              stroke="var(--gold)"
+              stroke-width="6"
+            />
+            <path d="M60 8 L74 40 L60 52 L46 40 Z" fill="var(--gold)" />
+            <circle cx="60" cy="30" r="7" fill="#fff8e8" />
+          </svg>
+
+          <h2
+            class="font-display text-4xl sm:text-6xl text-white mt-10 leading-tight reveal"
+          >
+            Shivangi,<br />
+will you let me be your
+<span class="font-script text-gold">forever?</span>
+          </h2>
+          <p class="text-white/60 mt-5 reveal">
+            (Absolutely Yes is also an acceptable answer.)
+          </p>
+
+          <div class="flex items-center justify-center gap-5 mt-12 flex-wrap">
+            <button
+              id="yes-btn"
+              class="btn-primary !bg-gold !text-plum !bg-none"
+              style="background: var(--gold)"
+            >
+              Absolutely Yes ❤
+            </button>
+            <button id="no-btn" class="btn-ghost !text-white !border-white/40">
+              No
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Celebration overlay -->
+      <div id="celebration">
+        <div class=" px-6">
+          <h2 class="font-script text-5xl sm:text-7xl text-gold">
+            She said YES!
+          </h2>
+          <p
+            class="text-white/55 font-display italic text-xl sm:text-2xl mt-6 max-w-lg mx-auto"
+          >
+            I don’t even know what to say right now… except thank you for saying yes.❤️
+
+Maybe one day I’ll find the right words to explain what this moment means to me, but right now, I’m just sitting here with the biggest smile on my face, realizing that the girl I kept thinking about, the girl I kept admiring, the girl who somehow became such an important part of my heart… just chose me too. 🥹❤️
+
+I know a “yes” is only a word, but yours feels like the beginning of an entire lifetime.
+
+And someday, when we look back at this moment, I hope we smile and say,
+
+“This was where our forever started.”
+
+I love you. And now that you've chosen me, I'm going to spend a lifetime making sure you never regret it. ❤️♾️
+
+          </p>
+          <button
+            id="celebration-close"
+            class="btn-primary !bg-gold !text-plum mt-10"
+            style="background: var(--gold)"
+          >
+            Stay Here Forever
+          </button>
+        </div>
+      </div>
+
+      <!-- ============================================================ -->
+      <!-- CONTACT / FOOTER -->
+      <!-- ============================================================ -->
+      <footer class="py-16 px-6 text-center relative">
+        <p class="section-eyebrow reveal">one more thing</p>
+        <h3 class="font-display section-title text-3xl sm:text-4xl mt-3 reveal">
+          Write Me Back
+        </h3>
+        <p class="opacity-70 max-w-md mx-auto mt-3 reveal">
+          This form doesn't send anywhere yet — wire it up to Formspree, Netlify
+          Forms, or your own inbox when you deploy.
+        </p>
+        <form
+          class="max-w-md mx-auto mt-8 space-y-4 text-left reveal"
+          data-netlify="true"
+          name="contact"
+          netlify
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <input
+            required
+            name="name"
+            placeholder="Your name"
+            class="w-full rounded-xl border border-rose/25 bg-paper px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose/40"
+          />
+          <textarea
+            required
+            name="message"
+            rows="4"
+            placeholder="Your message…"
+            class="w-full rounded-xl border border-rose/25 bg-paper px-4 py-3 focus:outline-none focus:ring-2 focus:ring-rose/40"
+          ></textarea>
+          <button type="submit" class="btn-primary w-full justify-center">
+            Send
+          </button>
+        </form>
+        <p class="text-xs opacity-40 mt-14">
+          Made with ❤
+        </p>
+      </footer> 
+    </main>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
