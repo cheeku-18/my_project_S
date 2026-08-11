@@ -168,7 +168,7 @@ const CONFIG = {
   // Add a real audio src (e.g. "assets/audio/note1.mp3") to make these playable.
   voiceNotes: [
     { title: "An Apology & a Confession — Part 1", duration: "18:38", src: "assets/audio/S1.mp3" },
-    { title: "Confession — Part 2", duration: "16:24", src: "assets/audio/S2.mp3" },
+    { title: "Confession — Part 2", duration: "15:20", src: "assets/audio/S-2.mp3" },
     { title: "A song that reminds me of you", duration: "3:57", src: "assets/audio/Hoor.mp3" },
     { title: "A song for you from my side ", duration: "5:28", src: "assets/audio/humko.mp3" }
   ]
