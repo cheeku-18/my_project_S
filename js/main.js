@@ -158,7 +158,7 @@ const CONFIG = {
       text: "Conquering every turn of the journey with you riding beside me."
     },
       {
-      icon: "❤️"
+      icon: "❤️" ,
       title: "What's Next For Us?",
       text: "Not knowing exactly where life will take us but knowing that I want to keep choosing you through every new chapter. More places, more dreams, more laughter, more challenges, and hopefully a lifetime of saying, “Remember when we did that?”."
     },
