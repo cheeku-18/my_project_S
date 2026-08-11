@@ -157,16 +157,11 @@ const CONFIG = {
       title: "Bike Trip To Ladakh",
       text: "Conquering every turn of the journey with you riding beside me."
     },
-    {
-      icon: "📚",
-      title: "A Shelf Of Books We've Both Read",
-      text: "A little collection of stories we’ve loved, pages we’ve shared, and memories we’ve made together along the way."
+      {
+      icon: "❤️"
+      title: "What's Next For Us?",
+      text: "Not knowing exactly where life will take us but knowing that I want to keep choosing you through every new chapter. More places, more dreams, more laughter, more challenges, and hopefully a lifetime of saying, “Remember when we did that?”."
     },
-    //   {
-    //   icon: "❤️"
-    //   title: "What's Next For Us?",
-    //   text: "Not knowing exactly where life will take us but knowing that I want to keep choosing you through every new chapter. More places, more dreams, more laughter, more challenges, and hopefully a lifetime of saying, “Remember when we did that?”."
-    // },
   ],
 
   // ---------------- Voice Notes ----------------
