@@ -153,9 +153,24 @@ const CONFIG = {
       text: "Waking up to clouds, cold winds, and breathtaking mountain landscapes."
     },
     {
-      icon: "🏍️",
-      title: "Bike Trip To Ladakh",
-      text: "Conquering every turn of the journey with you riding beside me."
+      icon: "🌃",
+      title: "Little Adventures, Just Because",
+      text: "Random drives, midnight walks, spontaneous plans, discovering hidden places, and saying “let’s go” without needing a reason."
+    },
+     {
+      icon: "☕️",
+      title: "Discovering New Cafés",
+      text: "Finding cute little cafés in every city we visit, trying new coffee and desserts, sitting across from each other, and turning ordinary afternoons into our favourite memories."
+    },
+      {
+      icon: "🏖️",
+      title: "Goa, Just Us",
+      text: "Sunsets by the sea, long walks on the beach, late-night conversations, and a little escape where it’s just you, me, and the sound of the waves."
+    },
+     {
+      icon: "📚",
+      title: "A Shelf Of Books We’ve Both Read",
+      text: "A little collection of stories we’ve loved, pages we’ve shared, books we’ve recommended to each other, and memories attached to every one of them."
     },
       {
       icon: "❤️" ,
