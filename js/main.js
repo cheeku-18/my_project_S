@@ -137,11 +137,7 @@ const CONFIG = {
       title: "Jyotirling Darshan Together",
       text: "Visiting all the sacred Jyotirlings hand in hand, collecting blessings and memories."
     },
-    {
-      icon: "🏖️",
-      title: "Goa, Just Us",
-      text: "Sunsets, beaches, and endless conversations by the sea."
-    },
+   
     {
       icon: "✈️",
       title: "International Trips Together",
@@ -176,6 +172,12 @@ const CONFIG = {
       icon: "❤️" ,
       title: "What's Next For Us?",
       text: "Not knowing exactly where life will take us but knowing that I want to keep choosing you through every new chapter. More places, more dreams, more laughter, more challenges, and hopefully a lifetime of saying, “Remember when we did that?”."
+    },
+      {
+      icon: "🏡",
+      title: "The Day We Made It",
+      text: "Someday, I want us to come home to a place that is completely ours. Maybe we’ll sit by the window after a long day, talk about everything and nothing, and look around at the little life we built together. And for a moment, we won’t need to dream about a better tomorrow anymore.
+We will just look at each other and think, We made it… finally, we are here. And honestly, I think that moment would be one of the most beautiful moments of my life because I’d have everything I ever wanted sitting right beside me. ❤️"
     },
   ],
 
