@@ -176,8 +176,7 @@ const CONFIG = {
       {
       icon: "🏡",
       title: "The Day We Made It",
-      text: "Someday, I want us to come home to a place that is completely ours. Maybe we’ll sit by the window after a long day, talk about everything and nothing, and look around at the little life we built together. And for a moment, we won’t need to dream about a better tomorrow anymore.
-We will just look at each other and think, We made it… finally, we are here. And honestly, I think that moment would be one of the most beautiful moments of my life because I’d have everything I ever wanted sitting right beside me. ❤️"
+      text: "Someday, I want us to come home to a place that is completely ours. Maybe we’ll sit by the window after a long day, talk about everything and nothing, and look around at the little life we built together. And for a moment, we won’t need to dream about a better tomorrow anymore. We will just look at each other and think, We made it… finally, we are here. And honestly, I think that moment would be one of the most beautiful moments of my life because I’d have everything I ever wanted sitting right beside me. ❤️"
     },
   ],
 
